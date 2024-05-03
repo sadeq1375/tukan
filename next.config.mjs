@@ -1,4 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    domains: [
+      "avatars.githubusercontent.com",
+      "res.cloudinary.com",
+      "lh3.googleusercontent.com",
+    ],
+  },
+  experimental: {
+    swcPlugins: [["next-superjson-plugin", {}]],
+  },
+};
 
 export default nextConfig;
