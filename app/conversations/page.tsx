@@ -1,7 +1,17 @@
 "use client";
 
-const page = () => {
-  return <div></div>;
-};
+import useConversation from "@/hooks/useConversation";
+import EmptyState from "../components/EmptyState";
+import clsx from "clsx";
 
-export default page;
+const Home = () => {
+  const { isOpen } = useConversation();
+  return (
+    <div
+      className={clsx(`lg:pl-80 h-full lg:block`, isOpen ? "block" : "hidden")}
+    >
+      <EmptyState />
+    </div>
+  );
+};
+export default Home;
