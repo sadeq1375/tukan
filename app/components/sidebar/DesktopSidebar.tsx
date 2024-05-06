@@ -15,7 +15,7 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({ currentUser }) => {
   const router = useRouter();
   const routes = useRoutes();
   const [isOpen, setIsOpen] = useState(false);
-  console.log(currentUser);
+
   const navigateToHomePage = () => {
     router.push("/"); // Navigate to the home page
   };

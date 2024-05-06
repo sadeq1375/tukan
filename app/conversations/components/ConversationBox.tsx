@@ -4,6 +4,7 @@ import Avatar from "@/app/components/Avatar";
 import { FullConversationType } from "@/app/types";
 import useOtherUser from "@/hooks/useOtherUser";
 import clsx from "clsx";
+import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
@@ -49,8 +50,9 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
     if (lastMessage?.body) {
       return lastMessage.body;
     }
-    return `Start an conversation ${(<BiCoffee />)}`;
+    return `Start new chat 🍵`;
   }, [lastMessage]);
+
   return (
     <div
       className={clsx(
@@ -60,6 +62,28 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
       onClick={handleClick}
     >
       <Avatar user={otherUser} />
+      <div className="min-w-0 flex-1">
+        <div className="focus:outline-none">
+          <div className="flex justify-between items-center mb-1">
+            <p className="text-md font-medium text-gray-900">
+              {data.name || otherUser.name}
+            </p>
+            {lastMessage?.createdAt && (
+              <p className="text-xs text-gray-400 font-light">
+                {format(new Date(lastMessage.createdAt), "p")}
+              </p>
+            )}
+          </div>
+          <p
+            className={clsx(
+              `truncate text-sm font-serif`,
+              hasSeen ? "text-gray-500" : "text-black font-medium"
+            )}
+          >
+            {lastMessageText}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
