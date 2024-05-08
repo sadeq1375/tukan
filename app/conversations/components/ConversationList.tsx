@@ -39,16 +39,6 @@ const ConversationList: React.FC<ConversationListProps> = ({
             selected={conversationId === item.id}
           />
         ))}
-        <div className="hidden lg:block fixed bottom-3 left-[295px]">
-          <Image
-            src="/Gifs/tenor.gif"
-            alt="gif"
-            width={90}
-            height={90}
-            unoptimized
-            className="rounded-full"
-          />
-        </div>
       </div>
     </aside>
   );

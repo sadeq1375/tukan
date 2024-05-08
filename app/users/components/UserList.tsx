@@ -2,7 +2,6 @@
 
 import { User } from "@prisma/client";
 import UserBox from "./UserBox";
-import Image from "next/image";
 
 interface UserListProps {
   items: User[];
@@ -19,16 +18,6 @@ const UserList: React.FC<UserListProps> = ({ items }) => {
         {items.map((item) => (
           <UserBox key={item.id} data={item} />
         ))}
-        <div className="hidden lg:block fixed bottom-3 left-[295px]">
-          <Image
-            src="/Gifs/tenor.gif"
-            alt="gif"
-            width={90}
-            height={90}
-            unoptimized
-            className="rounded-full"
-          />
-        </div>
       </div>
     </aside>
   );
