@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/app/components/Button";
 import Modal from "@/app/components/Modal";
 import Input from "@/app/components/input/Input";
 import Select from "@/app/components/input/Select";
@@ -65,14 +66,13 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
                 required
                 errors={errors}
               />
-
               <Select
                 disabled={isLoading}
                 label="Members"
-                options={users.map((user) => {
-                  value: user.id;
-                  label: user.name;
-                })}
+                options={users.map((user) => ({
+                  value: user.id,
+                  label: user.name,
+                }))}
                 onChange={(value) => {
                   setValue("members", value, { shouldValidate: true });
                 }}
@@ -80,6 +80,19 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
               />
             </div>
           </div>
+        </div>
+        <div className="mt-6 flex items-center justify-end gap-6">
+          <Button
+            disabled={isLoading}
+            onClick={onClose}
+            type="button"
+            secondary
+          >
+            Cancle
+          </Button>
+          <Button type="submit" disabled={isLoading}>
+            Create
+          </Button>
         </div>
       </form>
     </Modal>

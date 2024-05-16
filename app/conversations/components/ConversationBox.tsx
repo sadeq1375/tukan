@@ -1,6 +1,7 @@
 "use client";
 
 import Avatar from "@/app/components/Avatar";
+import AvatarGroup from "@/app/components/AvatarGroup";
 import { FullConversationType } from "@/app/types";
 import useOtherUser from "@/hooks/useOtherUser";
 import clsx from "clsx";
@@ -8,7 +9,6 @@ import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
-import { BiCoffee } from "react-icons/bi";
 
 interface ConversationBoxProps {
   data: FullConversationType;
@@ -61,7 +61,12 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
       )}
       onClick={handleClick}
     >
-      <Avatar user={otherUser} />
+      {data?.isGroup ? (
+        <AvatarGroup users={data.users} />
+      ) : (
+        <Avatar user={otherUser} />
+      )}
+
       <div className="min-w-0 flex-1">
         <div className="focus:outline-none">
           <div className="flex justify-between items-center mb-1">
