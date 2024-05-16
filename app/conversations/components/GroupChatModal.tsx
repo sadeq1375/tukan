@@ -2,6 +2,7 @@
 
 import Modal from "@/app/components/Modal";
 import Input from "@/app/components/input/Input";
+import Select from "@/app/components/input/Select";
 import { User } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -72,6 +73,10 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
                   value: user.id;
                   label: user.name;
                 })}
+                onChange={(value) => {
+                  setValue("members", value, { shouldValidate: true });
+                }}
+                value={members}
               />
             </div>
           </div>
