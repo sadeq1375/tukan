@@ -1,6 +1,7 @@
 "use client";
 
 import Modal from "@/app/components/Modal";
+import Input from "@/app/components/input/Input";
 import { User } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -53,7 +54,24 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
             <p className="mt-1 text-sm leading-6 text-gray-600">
               create a chat with more that two people.
             </p>
-            <div className="mt-10 flex flex-col gap-y-8"></div>
+            <div className="mt-10 flex flex-col gap-y-8">
+              <Input
+                register={register}
+                label="Name"
+                id="name"
+                disabled={isLoading}
+                required
+                errors={errors}
+              />
+              <Select
+                disabled={isLoading}
+                label="Members"
+                options={users.map((user) => {
+                  value: user.id;
+                  label: user.name;
+                })}
+              />
+            </div>
           </div>
         </div>
       </form>
