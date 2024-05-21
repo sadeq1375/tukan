@@ -14,6 +14,8 @@ import {
 import Avatar from "@/app/components/Avatar";
 import ConfirmModal from "../../components/ConfirmModal";
 import AvatarGroup from "@/app/components/AvatarGroup";
+import useActiveList from "@/hooks/useActiveList";
+import clsx from "clsx";
 interface ProfileDrawerProps {
   isOpen: boolean;
   onClose: () => void;
@@ -28,6 +30,8 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
 }) => {
   const otherUser = useOtherUser(data);
   const [confirmOpen, setIsConfirmOpen] = useState(false);
+  const { members } = useActiveList();
+  const isActive = members.indexOf(otherUser?.email!) !== -1;
   const joinedDate = useMemo(() => {
     return format(new Date(otherUser.createdAt), "PP");
   }, [otherUser.createdAt]);
@@ -38,8 +42,8 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
     if (data.isGroup) {
       return `${data.users.length} members`;
     }
-    return "Online";
-  }, [data]);
+    return isActive ? "Online" : "Offline";
+  }, [data, isActive]);
   return (
     <>
       <ConfirmModal
@@ -100,7 +104,13 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                             )}
                           </div>
                           <div>{title}</div>
-                          <div className="text-sm text-sky-500">
+                          <div
+                            className={clsx(
+                              `text-sm ${
+                                isActive ? "text-sky-500" : "text-gray-500"
+                              }`
+                            )}
+                          >
                             {statusText}
                           </div>
                           <div className="flex gap-10 my-8">
