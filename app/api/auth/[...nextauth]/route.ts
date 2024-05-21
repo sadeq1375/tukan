@@ -1,5 +1,5 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import nextAuth, { AuthOptions } from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import prisma from "@/app/libs/prismadb";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
@@ -46,11 +46,11 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
-  debug: process.env.NODE_ENV === "production",
+  debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
-const handler = nextAuth(authOptions);
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
